@@ -3,6 +3,13 @@ load('data/yeast7.mat', 'model'); % Creates base model variable
 step1();
 
     function step1()
+        % Before OptStrain is considered, enable humulene production
+        model = addReaction(model, ...
+            {'r_9998','farnesyl-diphosphate diphosphate-lyase'}, ...
+            's_0190 -> s_0633 + s_9999');
+        model = addReaction(model, {'r_9999','Humulene production'}, ...
+            's_9999 -> ');
+        
         % Step 1 of the OptStrain algorithm involves adding a curated
         % database of reactions to the model organism.
         keggToYeast = readJson('data/keggToYeast.json');
