@@ -18,6 +18,7 @@ S=model.S;
 lb=model.lb;
 ub=model.ub;
 c=model.c;
+native=model.native;
 [nmets,nrxns]=size(S);
 minObjectiveRatio = 0.8;
 minObjective = minObjectiveRatio*sol.f;
@@ -28,7 +29,7 @@ cvx_begin
 variable v(nrxns)
 variable y(nrxns) binary
 
-minimize sum(y)
+minimize sum(y(~native)) % Minimize, excluding native reactions
 subject to
 S*v == 0
 c'*v >= minObjective
