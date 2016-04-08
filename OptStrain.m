@@ -1,14 +1,15 @@
-function OptStrain
+function model = OptStrain
 model = struct(); % Declaration for explicit variable scope
+load('data/yeast7.mat', 'model'); % Initialize base model
 objectiveRxnId = 'r_9999';
 keggToYeastPath = 'data/keggToYeast.json';
 unidbPath = 'data/unidb.xlsx';
 step1(objectiveRxnId, keggToYeastPath, unidbPath);
 sol = step2(objectiveRxnId);
-disp(sol);
+disp(model)
 
     function step1(objectiveRxnId, keggToYeastPath, unidbPath)
-        load('data/yeast7.mat', 'model'); % Initialize base model
+       
         % Before OptStrain is considered, enable humulene production
         model = addReaction(model, ...
             {'r_9998','farnesyl-diphosphate diphosphate-lyase'}, ...
@@ -29,19 +30,21 @@ disp(sol);
         newReactionNum = 3000; % IDs not present in DB need to be created
         newCompoundNum = 20000;
         skip = false;
+        newRxnIds = {};
         for i = 1:length(uniDB)
             
             % Find a the new reaction's ID
             try
-                abbreviation = keggToYaeast.(uniDB(i, reactionIdColumn));
+                newRxnId = keggToYaeast.(uniDB(i, reactionIdColumn));
             catch
                 % Create one if it isn't
-                abbreviation = ['r_' num2str(newReactionNum)];
+                newRxnId = ['r_' num2str(newReactionNum)];
                 newReactionNum = newReactionNum + 1;
             end
+            newRxnIds = [newRxnIds {newRxnId}];
             
             % If the reaction isn't already in the model, add it
-            if isempty(find(strcmp(model.rxns,abbreviation), 1))
+            if isempty(find(strcmp(model.rxns,newRxnId), 1))
                 
                 % Create a new reaction from KEGG IDs
                 keggReaction = uniDB(i, reactionColumn);
@@ -68,18 +71,19 @@ disp(sol);
                 end
                 newRxn = strjoin(newParts);
                 % Add the newly created reaction
-                name = uniDB(i, reactionNameColumn);
+                newRxnName = uniDB(i, reactionNameColumn);
                 if ~skip
                     warning('off','all') % This step is noisy
-                    addReaction(model, {abbreviation, name}, newRxn);
+                    addReaction(model, {newRxnId, newRxnName}, newRxn);
                     warning('on','all')
                 else
                     skip = false;
                 end
-                % TODO: Add vector to model indicating whether reaction
-                % is native or not
             end
+            
         end
+        % Mark new reactions as non-native
+        model.native = ~ismember(model.rxns, newRxnIds);        
     end
 
     function sol = step2(objectiveRxnId)
