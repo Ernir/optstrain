@@ -14,6 +14,7 @@ model = augmentModel(model, objectiveRxnId, keggToYeastPath, unidbPath);
 
 % Optstrain step 3 - remove reactions, bounded by not going below a defined
 % ratio of the base yield.
+% This part is based heavily on examples by Steinn Guðmundsson
 S=model.S;
 lb=model.lb;
 ub=model.ub;
@@ -49,3 +50,13 @@ else
     idx=find(abs(y) > 1e-5);
     disp(model.rxns(idx))
 end
+
+% Optstrain step 4 - attempt OptKnock to find a growth coupling
+
+% Exclude those reactions we didn't want:
+excludedRxns = setdiff(idx, 1:length(model));
+for rxn = excludedRxns
+    model = changeRxnBounds(model, rxn, 0, 'b');
+end
+% Perform a very simple knockout for further analysis
+[wtRes,delRes] = simpleOptKnock(model,objectiveRxnId);
