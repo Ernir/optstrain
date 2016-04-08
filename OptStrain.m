@@ -1,19 +1,26 @@
 function OptStrain
-load('data/yeast7.mat', 'model'); % Creates base model variable
-step1();
+model = struct(); % Declaration for explicit variable scope
+objectiveRxnId = 'r_9999';
+keggToYeastPath = 'data/keggToYeast.json';
+unidbPath = 'data/unidb.xlsx';
+step1(objectiveRxnId, keggToYeastPath, unidbPath);
+sol = step2(objectiveRxnId);
+disp(sol);
 
-    function step1()
+    function step1(objectiveRxnId, keggToYeastPath, unidbPath)
+        load('data/yeast7.mat', 'model'); % Initialize base model
         % Before OptStrain is considered, enable humulene production
         model = addReaction(model, ...
             {'r_9998','farnesyl-diphosphate diphosphate-lyase'}, ...
             's_0190 -> s_0633 + s_9999');
-        model = addReaction(model, {'r_9999','Humulene production'}, ...
+        model = addReaction(model, ...
+            {objectiveRxnId,'humulene exchange'}, ...
             's_9999 -> ');
         
         % Step 1 of the OptStrain algorithm involves adding a curated
         % database of reactions to the model organism.
-        keggToYeast = readJson('data/keggToYeast.json');
-        [~,~,RAW] = xlsread('data/unidb.xlsx');
+        keggToYeast = readJson(keggToYeastPath);
+        [~,~,RAW] = xlsread(unidbPath);
         uniDB = RAW(2:end,:);
         % Add reactions from the "universal" database to the model
         reactionIdColumn = 2;
@@ -69,7 +76,16 @@ step1();
                 else
                     skip = false;
                 end
+                % TODO: Add vector to model indicating whether reaction
+                % is native or not
             end
         end
+    end
+
+    function sol = step2(objectiveRxnId)
+        model = changeObjective(model, objectiveRxnId);
+        oxygen = model.rxns(strcmp('oxygen exchange', model.rxnNames));
+        model = changeRxnBounds(model, oxygen, 0, 'b');
+        sol = optimizeCbModel(model);
     end
 end
