@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 \usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[icelandic]{babel}
@@ -10,21 +10,65 @@
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{wrapfig}
+\usepackage{minted}
 \usepackage[pdftex,bookmarks=true,colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
 
 \title{OptStrain}
 \author{Eiríkur Ernir Þorsteinsson \and Jónas Tryggvi Stefánsson}
-
-\setcounter{secnumdepth}{0}
+\date{8. apríl 2016}
+%\setcounter{secnumdepth}{0}
 
 \begin{document}
 
 \maketitle
 
-\section{Hér er kafli}
+\section{Lýsing á reikniritinu}
 
-Vísun í OptStrain-greinina svo þetta compile-i \cite{pharkya2004optstrain}
+Um er að ræða útfærslu á reikniritinu OptStrain\cite{pharkya2004optstrain} sem notað er til að finna uppskriftir að örverum sem henta betur til framleiðslu á gefnu efni. OptStrain er framkvæmt í fjórum skrefum:
 
+Reikniritið gerir ráð fyrir grunnmódeli af lífveru sem hentar til línulegrar bestunar.
+\begin{enumerate}
+ \item Efnahvörfum úr stórum efnahvarfagagnagrunni er bætt við grunnmódel af gefinni lífveru til að fjölga mögulegum pathway-um
+ \item Hámörkun á seytingu æskilegs efnis við gefnar aðstæður er sett upp sem línulegt bestunarverkefni og leyst
+ \item Lágmörkun á fjölda viðbættra efnahvarfa (úr 1. skrefi) er sett upp sem MILP-verkefni og leyst
+ \item OptKnock-reiknirit\cite{burgard2003optknock} er keyrt á breytta módelið til að reyna að finna útslátt sem kúplar seytingu efnisins við vöxt
+\end{enumerate}
+
+\section{Um útfærslu}
+Til viðbótar við almenna útfærslu sem lýst er að ofan bætist við upphafsskref þar sem efnahvörf sem nauðsynleg eru til framleiðslu á efninu sem framleiða skal, humulene, er bætt við \href{http://yeast.sourceforge.net/}{Yeast 7 módelið} af \emph{Saccharomyces cerevisiae}. Þetta er gert fremst í \nameref{code:augmentModel}.
+
+Útfærsla er í Matlab. Hún krefst uppsettra Cobra, CVX og Gurobi pakka. Módelið sem um ræðir er Cobra-módel.
+\subsection{Útvíkkkun á módeli}
+Útvíkkun á módeli fer fram í \nameref{code:augmentModel}. Hér er efnahvörfum hlaðið úr Excel-grunni. Mikið af vinnunni fer í að þýða þau efnahvarfaauðkenni sem gefin eru í grunninum yfir á form sem hentar módelinu. Þegar auðkenni finnast ekki í módelinu eru þau búin til. Öllum efnahvörfum í grunninum (sem reyndust á skiljanlegu sniði) er bætt við grunnmódelið. Þessi hluti reikniritsins gekk að óskum.
+\subsection{Bestun á humulene-framleiðslu}
+Humulene-framleiðsla við loftfirrtar aðstæður er bestuð í \nameref{code:calcBaseYield} með nú kunnuglegum aðferðum. Þessi hluti reikniritsins er einnig skv. lýsingu.
+\subsection{Lágmörkun á fjölda viðbættra efnahvarfa}
+\label{sec:lagmorkun}
+CVX og Gurobi bestunarpakkarnir eru notaðir til að lágmarka fjölda viðbættra efnahvarfa. Sá kóði er staðsettur í \nameref{code:OptStrain} skránni sjálfri vegna scoping-reglna Matlab.
+
+Hér er á þessu stigi að finna \emph{mikið vandamál}. Af enn óþekktum ástæðum tekur CVX-pakkinn ekki við gefnum líkönum af gersveppnum. Þetta á við um módel af grunnútgáfu sveppsins og viðbættar útgáfur. Þessi hluti virkar vel á einfalda \texttt{Ecoli\_core\_model} líkanið, en umfangsmiklar prófanir eru vegna þessarar takmörkunar.
+\subsection{Útsláttur til vaxtarkúplunar}
+Einföld útgáfa af OptKnock, \texttt{simpleOptKnock} úr Cobra , er notuð til að finna vænlega útslætti. Þessi hluti er takmarkaðri en lýsing OptStrain segir til um, en dugar til að fá nokkra mynd af einföldustu útsláttum.
+
+Þessi hluti er einnig staðsettur í \nameref{code:OptStrain} skránni, neðst.
+\section{Niðurstöður}
+Útslættir hentugir til vaxtarkúplunar á humulene-framleiðslu hafa ekki fundist vegna takmarkana sem lýst er undir \nameref{sec:lagmorkun}.
+
+Ein niðurstaða er þó bæði gremjuleg og áberandi - humulene-framleiðsla eykst ekki við aukningu á módelinu í skrefi 1, hún helst í 0.2222 þrátt fyrir viðbætur við staðalupptöku á glúkósa. Áhugavert væri að athuga hvort þetta á við um aðra kolefnisgjafa líka.
+\appendix
+\section{Forritskóði}
+Allan forritskóða má nálgast á \url{https://github.com/Ernir/optstrain}, valinn hluti er sýndur hér að neðan.
+
+Kóðinn er birtur í því ástandi sem hann er.
+\subsection{OptStrain.m}
+\label{code:OptStrain}
+\inputminted[linenos]{matlab}{../OptStrain.m}
+\subsection{augmentModel.m}
+\label{code:augmentModel}
+\inputminted[linenos]{matlab}{../augmentModel.m}
+\subsection{calcBaseYield.m}
+\label{code:calcBaseYield}
+\inputminted[linenos]{matlab}{../calcBaseYield.m}
 %%%%%%%%%%%%%%
 % HEIMILDASKRÁ
 %%%%%%%%%%%%%%
