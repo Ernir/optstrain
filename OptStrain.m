@@ -16,11 +16,14 @@ model = augmentModel(model, objectiveRxnId, keggToYeastPath, unidbPath);
 % ratio of the base yield.
 % This part is based heavily on examples by Steinn Guðmundsson
 S=model.S;
-lb=model.lb;
+lb=model.lb; 
+lb(isinf(lb))=-1000; % Removing infs, which are problematic for gurobi
 ub=model.ub;
+ub(isinf(ub))=1000;
 c=model.c;
 native=model.native;
 [nmets,nrxns]=size(S);
+
 minObjectiveRatio = 0.8;
 minObjective = minObjectiveRatio*sol.f;
 
