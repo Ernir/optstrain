@@ -1,0 +1,13 @@
+function model = addTargetMetabolite(model, objectiveRxnId)
+% Before OptStrain is considered, make customized additions to the model.
+% In this case, it means enabling humulene production
+
+model = addReaction(model, ...
+    {'r_9998','farnesyl-diphosphate diphosphate-lyase'}, ...
+    's_0190 -> s_0633 + s_9999');
+model = addReaction(model, ...
+    {objectiveRxnId,'humulene exchange'}, ...
+    's_9999 -> ');
+model = changeObjective(model, objectiveRxnId);
+
+end

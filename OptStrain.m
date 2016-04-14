@@ -6,17 +6,20 @@ objectiveRxnId = 'r_9999';
 keggToYeastPath = 'data/keggToYeast.json';
 unidbPath = 'data/unidb.xlsx';
 
-% Optstrain step 1 - add new reactions
-model = augmentModel(model, objectiveRxnId, keggToYeastPath, unidbPath);
+% Make our custom (problem-specfic) additions to the model
+model = addTargetMetabolite(model, objectiveRxnId);
+
+% Optstrain step 1 - add a universal database of new reactions
+model = augmentModel(model, keggToYeastPath, unidbPath);
 
 % Optstrain step 2 - find the base yield for the augmented model
-[model, sol] = calcBaseYield(model, objectiveRxnId);
+[model, sol] = calcBaseYield(model);
 
 % Optstrain step 3 - remove reactions, bounded by not going below a defined
 % ratio of the base yield.
-% This part is based heavily on examples by Steinn Guðmundsson
+% This part is based heavily on examples by Stenable custom productioneinn Guðmundsson
 S=model.S;
-lb=model.lb; 
+lb=model.lb;
 lb(isinf(lb))=-1000; % Removing infs, which are problematic for gurobi
 ub=model.ub;
 ub(isinf(ub))=1000;
@@ -54,12 +57,13 @@ else
     disp(model.rxns(idx))
 end
 
-% Optstrain step 4 - attempt OptKnock to find a growth coupling
+% Optstrain step 4 - attempt to find growth coupling reaction deletions
 
 % Exclude those reactions we didn't want:
 excludedRxns = setdiff(idx, 1:length(model));
 for rxn = excludedRxns
     model = changeRxnBounds(model, rxn, 0, 'b');
 end
-% Perform a very simple knockout for further analysis
-[wtRes,delRes] = simpleOptKnock(model,objectiveRxnId);
+% Use GDLS to find reaction deletion
+[gdlsSolution, bilevelMILPProblem, gdlsSolutionStructs] = ...
+    GDLS(model, {objectiveRxnId});

@@ -1,13 +1,4 @@
-function model = augmentModel(model, objectiveRxnId, keggToYeastPath, unidbPath)
-
-% Before OptStrain is considered, enable humulene production
-model = addReaction(model, ...
-    {'r_9998','farnesyl-diphosphate diphosphate-lyase'}, ...
-    's_0190 -> s_0633 + s_9999');
-model = addReaction(model, ...
-    {objectiveRxnId,'humulene exchange'}, ...
-    's_9999 -> ');
-
+function model = augmentModel(model, keggToYeastPath, unidbPath)
 % Step 1 of the OptStrain algorithm involves adding a curated
 % database of reactions to the model organism.
 keggToYeast = readJson(keggToYeastPath);
