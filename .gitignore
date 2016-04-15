@@ -1,5 +1,5 @@
 *~
-*.pdf
+reports/*.pdf
 *.backup
 *.aux
 *.bbl
