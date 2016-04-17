@@ -27,13 +27,6 @@
 % Byrja á myndunum!
 % Hugmynd: Flæðirit yfir virkni reikniritsins
 
-\begin{figure}
-\caption[OptStrain reikniritið]{Skref OptStrain reikniritsins sem lýst er í \ref{sec:optstrain}.}
-\label{fig:flaedirit}
-\includegraphics[width=\textwidth]{Pics/OptStrainOverview}
-\end{figure}
-
-
 \section{Inngangur}
 
 Þó nokkur fordæmi eru fyrir því að erfðabreyta gersveppum til nota í matvælaiðnaði \cite{dequin2001potential}.
@@ -43,11 +36,38 @@
 % Byrja á undirtitlum
 % Mikilvægt að strúktúra málsgreinarnar vel
 % Mikilvægt að tengja 
+Fyrirsjáanlegar eru tvær aðalleiðir til að hagnýta framleiðslu á humulene í gersvepp.
+
+Fyrri leiðin er að nota erfðabreyttan gersvepp til að gerja bjór í annars hefðbundnu bjórgerðarferli. Sjá \ref{sec:hefdbundid}.
+
+Seinni leiðin er að besta framleiðslu á hreinu humulene, sem síðan væri einangrað. Sjá \ref{sec:optstrain}.
+
+Báðar aðferðir byggjast á greiningu á líkani af gersveppnum.
+\subsection{Líkan}
+Notast var við Yeast 7 líkanið af gersvepp (\emph{Saccharomyces cerevisiae}), sem sótt var af vefsíðunni \url{http://yeast.sourceforge.net/} og þýtt yfir á Matlab-form sem nýtilegt er með Cobra-pakkanum af Steini Guðmundssyni. Líkanið var valið vegna þess að það er umfangsmikið (m.t.t. fjölda gena og efnahvarfa), með lágt hlutfall blokkaðra efnahvarfa og lágt hlutfall dead-end efna. Önnur líkön gefa betri niðurstöður í sérhæfðum aðstæðum, en þessir eiginleikar Yeast 7 þóttu líklegir til að stuðla að nothæfum niðurstöðum í fyrstu hermunum \cite{heavner2015comparative}.
+
+\subsubsection{Viðbætur á líkani}
+Þekkt ensím, (2E,6E)-farnesyl-diphosphate diphosphate-lyase, myndar humulene út frá farnesyl-diphosphate \cite[KEGG: R08373]{Kanehisa01012000}. Farnesyl-diphosphate finnst í terpenoid lífefnasmíðaferlinu \cite[KEGG: rn00900]{Kanehisa01012000}, en bestun á því efnaferli hefur fengið nokkra athygli \cite{BIT:BIT21216,misawa2011pathway,asadollahi2008production}.
+
+Tveimur grundvallar-efnahvörfum var bætt við líkanið til að framleiða humulene úr farnesyl-diphosphate.
+Um er að ræða efnahvarf sem framleiðir humulene úr farnesyl-diphosphate annars vegar og exchange-hvarf fyrir humulene-ið hins vegar. Sjá mynd \ref{fig:pathway}
+
+\begin{figure}
+\caption[Viðbætur við Yeast 7]{Efnahvörf sem bætt var við Yeast 7 líkanið.}
+\label{fig:pathway}
+\includegraphics[width=\textwidth]{Pics/HumuleneAddition}
+\end{figure}
 \subsection{Framleiðsla í hefðbundnu gerjunarferli}
+\label{sec:hefdbundid}
 \subsubsection{Kolefnisgjafar og gefin skilyrði}
-Gerjanlegu sykrurnar í virti eru frúktósi, glúkósi, súkrósi, maltósi og maltótríósi. Þar vega mest hlutverk maltósa, frúktósa og maltótríósa \cite{otter1967determination}. Maltótríósi er ekki til staðar í Yeast7 líkaninu og hlutverk annarra kolefnisgjafa er óverulegt, svo til einföldunar voru einungis maltósi og glúkósi. Valin hlutföll eru 1 hlutur glúkósa á móti 2 hlutum maltósa. Gerjun fer fram við loftfirrtar aðstæður, sem gert er ráð fyrir í líkaninu.
+Gerjanlegu sykrurnar í virti eru frúktósi, glúkósi, súkrósi, maltósi og maltótríósi. Þar vega mest hlutverk maltósa, frúktósa og maltótríósa. Maltótríósi er ekki til staðar í Yeast7 líkaninu og hlutverk annarra kolefnisgjafa er óverulegt, svo til einföldunar voru einungis maltósi og glúkósi tekin til skoðunar. Valin hlutföll eru 1 hlutur glúkósa á móti 2 hlutum maltósa, sem er nálægt meðalhlutföllum þeirra í virti \cite{otter1967determination}. Gerjun fer fram við loftfirrtar aðstæður.
 \subsection{OptStrain}
 \label{sec:optstrain}
+\begin{figure}
+\caption[OptStrain reikniritið]{Skref OptStrain reikniritsins sem lýst er í \ref{sec:optstrain}. Sérstakar viðbætur má sjá á mynd \ref{fig:pathway}}
+\label{fig:flaedirit}
+\includegraphics[width=\textwidth]{Pics/OptStrainOverview}
+\end{figure}
 \subsubsection{Almenn lýsing}
 \subsubsection{Útfærsla}
 
