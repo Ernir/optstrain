@@ -67,9 +67,12 @@ excludedRxns = setdiff(idx, 1:length(model));
 for rxn = excludedRxns
     model = changeRxnBounds(model, rxn, 0, 'b');
 end
+% Perform robustness analysis for good measure
+humulene = strcmp('humulene exchange', model.rxnNames);
+robustnessAnalysis(model, model.rxns(humulene));
 % Use GDLS to find reaction deletion
 % Only consider humulene production here, general coupling is infeasible
 verbosePrint('Starting OptStrain step 4', verbose);
-model.c = double(strcmp('humulene exchange', model.rxnNames));
+model.c = double(humulene);
 [gdlsSolution, bilevelMILPProblem, gdlsSolutionStructs] = ...
     GDLS(model, model.rxns(model.c > 0));
