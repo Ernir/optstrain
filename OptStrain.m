@@ -1,23 +1,26 @@
-
 cvx_solver gurobi
-model = struct(); % Declaration for explicit variable scope
+verbose = true;
 load('data/yeast7.mat'); % Initialize base model
-objectiveRxnId = 'r_9999';
 keggToYeastPath = 'data/keggToYeast.json';
 unidbPath = 'data/unidb.xlsx';
 
 % Make our custom (problem-specfic) additions to the model
-model = addTargetMetabolite(model, objectiveRxnId);
+model = addTargetMetabolite(model);
 
 % Optstrain step 1 - add a universal database of new reactions
-model = augmentModel(model, keggToYeastPath, unidbPath);
+verbosePrint('Starting OptStrain step 1', verbose);
+[model] = augmentModel(model, keggToYeastPath, unidbPath);
 
-% Optstrain step 2 - find the base yield for the augmented model
+% Optstrain step 2 - find the base objective function maximum value for 
+% the augmented model
+verbosePrint('Starting OptStrain step 2', verbose);
 [model, sol] = calcBaseYield(model);
+disp(['Objective function value is ' num2str(sol.f)])
 
 % Optstrain step 3 - remove reactions, bounded by not going below a defined
-% ratio of the base yield.
-% This part is based heavily on examples by Stenable custom productioneinn Guðmundsson
+% ratio of the pre-calculated maximum value
+% This part is based heavily on examples by Steinn Guðmundsson
+verbosePrint('Starting OptStrain step 3', verbose);
 S=model.S;
 lb=model.lb;
 lb(isinf(lb))=-1000; % Removing infs, which are problematic for gurobi
@@ -65,5 +68,8 @@ for rxn = excludedRxns
     model = changeRxnBounds(model, rxn, 0, 'b');
 end
 % Use GDLS to find reaction deletion
+% Only consider humulene production here, general coupling is infeasible
+verbosePrint('Starting OptStrain step 4', verbose);
+model.c = double(strcmp('humulene exchange', model.rxnNames));
 [gdlsSolution, bilevelMILPProblem, gdlsSolutionStructs] = ...
-    GDLS(model, {objectiveRxnId});
+    GDLS(model, model.rxns(model.c > 0));
