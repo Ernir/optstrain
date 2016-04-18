@@ -6,5 +6,9 @@ reports/*.pdf
 *.blg
 *.log
 *.out
+*_minted*
 
 gurobi
+
+sd1.m
+sd2.m
