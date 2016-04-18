@@ -10,6 +10,7 @@
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{wrapfig}
+\usepackage{subcaption}
 \usepackage[pdftex,bookmarks=true,colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
 
 \title{Framleiðsla á humulene í Saccharomyces cerevisiae}
@@ -62,11 +63,11 @@ Um er að ræða efnahvarf sem framleiðir humulene úr farnesyl-diphosphate ann
 \subsubsection{Kolefnisgjafar og gefin skilyrði}
 Gerjanlegu sykrurnar í virti eru frúktósi, glúkósi, súkrósi, maltósi og maltótríósi. Þar vega mest hlutverk maltósa, frúktósa og maltótríósa. Maltótríósi er ekki til staðar í Yeast 7 líkaninu og hlutverk annarra kolefnisgjafa er óverulegt, svo til einföldunar voru einungis maltósi og glúkósi tekin til skoðunar. Valin hlutföll eru 1 hlutur glúkósa á móti 2 hlutum maltósa, sem er nálægt meðalhlutföllum þeirra í virti \cite{otter1967determination}. 
 
-Í bjórgerð fer gerjun fram við að mestu leyti loftfirrtar aðstæður. \emph{S. cerevisiae} getur vaxið við slík skilyrði \cite{ishtar2007factors}, en módelið nær ekki til þeirra.
+Í bjórgerð fer gerjun fram við að mestu leyti loftfirrtar aðstæður. \emph{S. cerevisiae} getur vaxið við slík skilyrði \cite{ishtar2007factors}, en líkanið nær ekki til þeirra.
 \subsection{OptStrain}
 \label{sec:optstrain}
 \begin{figure}
-\caption[OptStrain reikniritið]{Skref OptStrain reikniritsins sem lýst er í \ref{sec:optstrain}. Sérstakar viðbætur má sjá á mynd \ref{fig:pathway}}
+\caption[OptStrain reikniritið]{Skref OptStrain reikniritsins sem lýst er í \ref{sec:optstrain}. Sjá sérstakar viðbætur á mynd \ref{fig:pathway}}
 \label{fig:flaedirit}
 \includegraphics[width=\textwidth]{Pics/OptStrainOverview}
 \end{figure}
@@ -78,6 +79,20 @@ Gerjanlegu sykrurnar í virti eru frúktósi, glúkósi, súkrósi, maltósi og 
 Mikilvæg efni eru: ethanol, isoamyl acetate (bananabragð), glycerol (sæta), urea (óbragð) \cite{dequin2001potential}.
 
 % Undirtitlar hér líka
+
+\begin{figure}
+\caption[Áhrif humulene á hefðbundna gerjun]{Yfirlit yfir áhrif humulene-framleiðslu á hefðbundna gerjun}
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{Hámarksflæði með og án bestunar á humulene-framleiðslu}
+\includegraphics[width=\textwidth]{Pics/BrewingMetMaxFlow}
+\end{subfigure}
+\hspace{0.5cm}
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{Áhrif humulene-framleiðslu á markfallsgildi}
+\includegraphics[width=\textwidth]{Pics/BrewingRobustnessAnalysis}
+\end{subfigure}
+\end{figure}
 
 \section{Samantekt}
 % Byrjar oftast eins: Here we set out to...
