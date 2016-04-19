@@ -6,7 +6,7 @@ load('data/yeast7.mat')
 clf; close all;
 
 % Add humulene to our computational model and define objective function
-model = addTargetMetabolite(model);
+model = constructObjectiveFunction(model);
 humulene = strcmp('humulene exchange', model.rxnNames);
 
 % Compare the fluxes with and without humulene
