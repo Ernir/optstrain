@@ -69,7 +69,7 @@ Notast var við Yeast 7 líkanið\cite{yeastsf} af \emph{Saccharomyces cerevisia
 Þekkt ensím, (2E,6E)-farnesyl-diphosphate diphosphate-lyase, myndar humulene út frá farnesyl-diphosphate \cite[KEGG: R08373]{Kanehisa01012000}. Farnesyl-diphosphate finnst í terpenoid lífefnasmíðaferlinu \cite[KEGG: rn00900]{Kanehisa01012000}, en bestun á því efnaferli hefur fengið nokkra athygli \cite{BIT:BIT21216,misawa2011pathway,asadollahi2008production}.
 
 Tveimur grundvallar-efnahvörfum var bætt við líkanið til að framleiða humulene úr farnesyl-diphosphate.
-Um er að ræða efnahvarf sem framleiðir humulene úr farnesyl-diphosphate annars vegar og exchange-hvarf fyrir humulene-ið hins vegar. Sjá mynd \ref{fig:pathway}
+Um er að ræða efnahvarf sem framleiðir humulene úr farnesyl-diphosphate annars vegar og exchange-hvarf fyrir humulene-ið hins vegar. Þennan viðbætta ``pathway'' má sjá á mynd \ref{fig:pathway}.
 
 \begin{figureonecolumn}
 \caption[Viðbætur við Yeast 7]{Efnahvörf sem bætt var við Yeast 7 líkanið.}
@@ -78,12 +78,13 @@ Um er að ræða efnahvarf sem framleiðir humulene úr farnesyl-diphosphate ann
 \end{figureonecolumn}
 \subsection{Framleiðsla í hefðbundnu gerjunarferli}
 \label{sec:hefdbundid}
+Í hefðbundinni bjórgerð er svokallaður virtur fyrst framleiddur úr vatni og korni. Virturinn er sykruríkur vökvi sem síðar er gerjaður. Eiginleikar virtsins og aðstæður gerjunarinnar setja skorður á framleiðslu á humulene með þessari aðferð.
 \subsubsection{Kolefnisgjafar og gefin skilyrði}
 Gerjanlegu sykrurnar í virti eru frúktósi, glúkósi, súkrósi, maltósi og maltótríósi. Þar vega mest hlutverk maltósa, frúktósa og maltótríósa. Maltótríósi er ekki til staðar í Yeast 7 líkaninu og hlutverk annarra kolefnisgjafa er óverulegt, svo til einföldunar voru einungis maltósi og glúkósi tekin til skoðunar. Valin hlutföll eru 1 hlutur glúkósa á móti 2 hlutum maltósa, sem er nálægt meðalhlutföllum þeirra í virti \cite{otter1967determination}. 
 
 Í bjórgerð fer gerjun fram við að mestu leyti loftfirrtar aðstæður. \emph{S. cerevisiae} getur vaxið við slík skilyrði \cite{ishtar2007factors}, en líkanið nær ekki til þeirra.
 \subsubsection{Markfall}
-Þar sem framleiða á vöru til neyslu er nauðsynlegt að stýra framleiðslu á fleiri efnum en einungis humulene. Mikilvæg efni í bjór \cite{dequin2001potential} sem tekin voru til athugunar eru:
+Þar sem framleiða á heildstæða vöru til neyslu er nauðsynlegt að stýra framleiðslu á fleiri efnum en einungis humulene. Mikilvæg efni í bjór \cite{dequin2001potential} sem tekin voru til athugunar eru:
 \begin{itemize}
  \item etanól
  \item ísóamýl acetat, ábyrgt fyrir ``bananalykt'' af ýmsum gerðum bjórs
@@ -93,6 +94,9 @@ Gerjanlegu sykrurnar í virti eru frúktósi, glúkósi, súkrósi, maltósi og 
 Markfall var smíðað sem tekur tillit til þessara efna. 
 
 Æskilegu efnunum var úthlutað stuðlum sem jafna forgang þeirra m.t.t. fjölda kolefnisfrumeinda í efnunum, til að koma í veg fyrir að Cobra úthluti efnahvörfum sem seyta efnum með fáum kolefnisfrumeindum óeðlilega miklu flæði. ``Rétt'' gildi á þessum efnum myndi fara eftir gerð bjórsins sem framleiða ætti. Þetta er gert í kóðadæmi \ref{code:addTargetMetabolite}.
+
+\subsubsection{Útreikningar}
+Flæðigreining (e. \emph{flux variability analysis}) og greining á þoli (e. \emph{robustness analysis}) voru framkvæmd á líkaninu. Þetta er gert í kóðadæmi \ref{code:enhancedBrewing}.
 
 \subsection{OptStrain}
 
@@ -142,13 +146,18 @@ Breyting frá upphaflegri forskrift: GDLS \cite{lun2009large} í stað OptKnock.
 \clearpage
 \appendix
 \section{Kóði}
-Allan forritskóða má einnig finna á \href{https://github.com/Ernir/optstrain}{Github-síðu verkefnisins}.
-\subsection{OptStrain.m}
-\label{code:OptStrain}
-\matlab{../OptStrain.m}
+Hér má finna valin kóðadæmi. Allan forritskóða og gögn sem unnið er með má finna á \href{https://github.com/Ernir/optstrain}{Github-síðu verkefnisins}.
 
 \subsection{addTargetMetabolite.m}
 \label{code:addTargetMetabolite}
 \matlab{../addTargetMetabolite.m}
+
+\subsubsection{enhancedBrewing.m}
+\label{code:enhancedBrewing}
+\matlab{../enhancedBrewing.m}
+
+\subsection{OptStrain.m}
+\label{code:OptStrain}
+\matlab{../OptStrain.m}
 
 \end{document}
