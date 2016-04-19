@@ -56,19 +56,15 @@ Humlar eru dýrt hráefni sem erfitt er að rækta á mörgum svæðum heimsins 
 
 Humulene\cite[KEGG: C09684]{Kanehisa01012000} er eitt mikilvægra efnasambanda í lykt og bragði bjórs \cite{howard1957evaluation}. Lagt er upp með athuga reikningslegar forsendur fyrir því að nota erfðabreyttan gersvepp til að framleiða humulene, en þó nokkur fordæmi eru fyrir því að erfðabreyta gersveppum til nota í matvælaiðnaði \cite{dequin2001potential}.
 
-Fyrirsjáanlegar eru tvær aðalleiðir til að hagnýta framleiðslu á humulene í gersvepp. Fyrri leiðin er að nota erfðabreyttan gersvepp til að gerja bjór í annars hefðbundnu bjórgerðarferli. Seinni leiðin er að besta framleiðslu á hreinu humulene, sem síðan væri einangrað.
+Fyrirsjáanlegar eru tvær aðalleiðir til að hagnýta framleiðslu á humulene í gersvepp. Fyrri leiðin er að nota erfðabreyttan gersvepp til að gerja bjór í annars hefðbundnu bjórgerðarferli, svo framleiðslan á humulene væri samhliða framleiðslu á efnum á borð við etanól sem ávallt er að finna í bjór. Seinni leiðin er að besta framleiðslu á hreinu humulene, sem síðan væri einangrað og bætt út bjór gerjuðum með hefðbundnu geri.
 
 Báðar hagnýtingarleiðir verða hér kannaðar með því að setja þær upp sem línuleg bestunarverkefni, en línuleg bestunarlíkön hafa verið notuð með góðum árangri til spá fyrir um möguleg efnaskiptaferli í örverum \cite{banga2008optimization,edwards2001silico}.
 \section{Aðferð}
 Línulegu bestunarverkefnin voru sett upp í Matlab. Þau voru leyst með aðstoð COBRA Toolbox, CVX og Gurobi.
-% Fyrsti textinn sem er skrifaður
-% Byrja á undirtitlum
-% Mikilvægt að strúktúra málsgreinarnar vel
-% Mikilvægt að tengja 
-Báðar aðferðir byggjast á greiningu á líkani af gersveppnum.
-\subsection{Líkan}
-Notast var við Yeast 7 líkanið\cite{yeastsf} af \emph{Saccharomyces cerevisiae S288c}. Líkanið var valið vegna þess að það er umfangsmikið (m.t.t. fjölda gena og efnahvarfa), með lágt hlutfall blokkaðra efnahvarfa og lágt hlutfall dead-end efna. Önnur líkön gefa betri niðurstöður í sérhæfðum aðstæðum, en þessir eiginleikar Yeast 7 þóttu líklegir til að stuðla að nothæfum niðurstöðum í fyrstu hermunum \cite{heavner2015comparative}.
 
+Áskoranirnar sem felast í því að kanna leiðirnar tvær, humulene-framleiðslu í hefðbundnu bjórgerjunarferli og í ``efnaverksmiðju'' eru nokkuð mismunandi, en báðar leiðir byggjast á greiningu á líkani af gersveppnum.
+\subsection{Líkan}
+Notast var við Yeast 7 líkanið\cite{yeastsf} af \emph{Saccharomyces cerevisiae S288c}. Líkanið var valið vegna þess að það er umfangsmikið (m.t.t. fjölda gena og efnahvarfa), með lágt hlutfall blokkaðra efnahvarfa og lágt hlutfall dead-end efna. Önnur líkön gefa betri niðurstöður í sérhæfðum aðstæðum, en þessir eiginleikar Yeast 7 þóttu líklegir til að stuðla að nothæfum niðurstöðum í fyrstu hermunum \cite{heavner2015comparative}. 
 \subsubsection{Viðbætur á líkani}
 Þekkt ensím, (2E,6E)-farnesyl-diphosphate diphosphate-lyase, myndar humulene út frá farnesyl-diphosphate \cite[KEGG: R08373]{Kanehisa01012000}. Farnesyl-diphosphate finnst í terpenoid lífefnasmíðaferlinu \cite[KEGG: rn00900]{Kanehisa01012000}, en bestun á því efnaferli hefur fengið nokkra athygli \cite{BIT:BIT21216,misawa2011pathway,asadollahi2008production}.
 
@@ -146,16 +142,13 @@ Breyting frá upphaflegri forskrift: GDLS \cite{lun2009large} í stað OptKnock.
 \clearpage
 \appendix
 \section{Kóði}
-\begin{listing}[H]
-\caption{Keyrsluskrá OptStrain-reikniritsins}
+Allan forritskóða má einnig finna á \href{https://github.com/Ernir/optstrain}{Github-síðu verkefnisins}.
+\subsection{OptStrain.m}
 \label{code:OptStrain}
 \matlab{../OptStrain.m}
-\end{listing}
 
-\begin{listing}[H]
-\caption{Fall sem endurskilgreinir gefið módel, í þessu tilfelli er humulene-framleiðslu bætt við}
+\subsection{addTargetMetabolite.m}
 \label{code:addTargetMetabolite}
 \matlab{../addTargetMetabolite.m}
-\end{listing}
 
 \end{document}
