@@ -31,6 +31,7 @@
 
 \title{Framleiðsla á humulene í Saccharomyces cerevisiae}
 \author{Eiríkur Ernir Þorsteinsson \and Jónas Tryggvi Stefánsson}
+\date{}
 
 \begin{document}
 
@@ -49,20 +50,20 @@
 % Byrja á myndunum!
 % Hugmynd: Flæðirit yfir virkni reikniritsins
 \section{Inngangur}
+Áfengi drykkurinn bjór ætti að vera flestum lesendum kunnugur. Hefðbundinn bjór er myndaður með gerjun á vatnsblönduðu korni og bragðbættur með humlum.
 
-Þó nokkur fordæmi eru fyrir því að erfðabreyta gersveppum til nota í matvælaiðnaði \cite{dequin2001potential}.
+Humlar eru dýrt hráefni sem erfitt er að rækta á mörgum svæðum heimsins og hrörna hratt við geymslu. Þetta gefur ástæðu til að athuga hvort að hægt sé að minnka það magn humla sem bjórgerðin þarf með efnaviðbótum.
 
+Humulene er eitt mikilvægra efnasambanda í lykt og bragði bjórs \cite{howard1957evaluation}. Lagt er upp með athuga reikningslegar forsendur fyrir því að nota erfðabreyttan gersvepp til að framleiða humulene, en þó nokkur fordæmi eru fyrir því að erfðabreyta gersveppum til nota í matvælaiðnaði \cite{dequin2001potential}.
+
+Fyrirsjáanlegar eru tvær aðalleiðir til að hagnýta framleiðslu á humulene í gersvepp. Fyrri leiðin er að nota erfðabreyttan gersvepp til að gerja bjór í annars hefðbundnu bjórgerðarferli. Seinni leiðin er að besta framleiðslu á hreinu humulene, sem síðan væri einangrað. 
+
+Báðar hagnýtingarleiðir verða hér kannaðar með aðstoð línulegra bestunarlíkana, en línuleg bestunarlíkön hafa verið notuð með góðum árangri til spá fyrir um möguleg efnaskiptaferli í örverum \cite{banga2008optimization,edwards2001silico}.
 \section{Aðferð}
 % Fyrsti textinn sem er skrifaður
 % Byrja á undirtitlum
 % Mikilvægt að strúktúra málsgreinarnar vel
 % Mikilvægt að tengja 
-Fyrirsjáanlegar eru tvær aðalleiðir til að hagnýta framleiðslu á humulene í gersvepp.
-
-Fyrri leiðin er að nota erfðabreyttan gersvepp til að gerja bjór í annars hefðbundnu bjórgerðarferli. Sjá \ref{sec:hefdbundid}.
-
-Seinni leiðin er að besta framleiðslu á hreinu humulene, sem síðan væri einangrað. Sjá \ref{sec:optstrain}.
-
 Báðar aðferðir byggjast á greiningu á líkani af gersveppnum.
 \subsection{Líkan}
 Notast var við Yeast 7 líkanið af gersvepp (\emph{Saccharomyces cerevisiae}), sem sótt var af vefsíðunni \url{http://yeast.sourceforge.net/} og þýtt yfir á Matlab-form sem nýtilegt er með Cobra-pakkanum af Steini Guðmundssyni. Líkanið var valið vegna þess að það er umfangsmikið (m.t.t. fjölda gena og efnahvarfa), með lágt hlutfall blokkaðra efnahvarfa og lágt hlutfall dead-end efna. Önnur líkön gefa betri niðurstöður í sérhæfðum aðstæðum, en þessir eiginleikar Yeast 7 þóttu líklegir til að stuðla að nothæfum niðurstöðum í fyrstu hermunum \cite{heavner2015comparative}.
@@ -128,7 +129,7 @@ Markfall var smíðað sem tekur tillit til þessara efna.
 % Ræða hvern undirtitil í niðurstöðu-hlutanum sérstaklega
 % Aftur samantekt á síðustu málsgreinum, summary of impact
 
-Í framhaldinu: Skoða Myrcene \cite[KEGG: C06074]{Kanehisa01012000}?
+Í framhaldinu: Skoða Myrcene \cite[KEGG: C06074]{Kanehisa01012000}, sem er mögulega mikilvægasta sesquiterpene-ið þegar kemur að lykt bjórs \cite{guadagni1966odour}.
 
 %%%%%%%%%%%%%%
 % HEIMILDASKRÁ
