@@ -54,22 +54,25 @@
 
 Humlar eru dýrt hráefni sem erfitt er að rækta á mörgum svæðum heimsins og hrörna hratt við geymslu. Þetta gefur ástæðu til að athuga hvort að hægt sé að minnka það magn humla sem bjórgerðin þarf með efnaviðbótum.
 
-Humulene\cite[KEGG: C09684]{Kanehisa01012000} er eitt mikilvægra efnasambanda í lykt og bragði bjórs \cite{howard1957evaluation}. Lagt er upp með athuga reikningslegar forsendur fyrir því að nota erfðabreyttan gersvepp til að framleiða humulene, en þó nokkur fordæmi eru fyrir því að erfðabreyta gersveppum til nota í matvælaiðnaði \cite{dequin2001potential}.
+Humulene er eitt mikilvægra efnasambanda í lykt og bragði bjórs \cite{howard1957evaluation}. Lagt er upp með athuga reikningslegar forsendur fyrir því að nota erfðabreyttan gersvepp til að framleiða humulene, en þó nokkur fordæmi eru fyrir því að erfðabreyta gersveppum til nota í matvælaiðnaði \cite{dequin2001potential}.
 
-Fyrirsjáanlegar eru tvær aðalleiðir til að hagnýta framleiðslu á humulene í gersvepp. Fyrri leiðin er að nota erfðabreyttan gersvepp til að gerja bjór í annars hefðbundnu bjórgerðarferli, svo framleiðslan á humulene væri samhliða framleiðslu á efnum á borð við etanól sem ávallt er að finna í bjór. Seinni leiðin er að besta framleiðslu á hreinu humulene, sem síðan væri einangrað og bætt út bjór gerjuðum með hefðbundnu geri.
+Fyrirsjáanlegar eru tvær aðalleiðir til að hagnýta framleiðslu á humulene í gersvepp. Fyrri leiðin er að nota erfðabreyttan gersvepp til að gerja bjór í annars hefðbundnu bjórgerðarferli. Seinni leiðin er að besta framleiðslu á hreinu humulene, sem síðan væri einangrað. 
 
-Báðar hagnýtingarleiðir verða hér kannaðar með því að setja þær upp sem línuleg bestunarverkefni, en línuleg bestunarlíkön hafa verið notuð með góðum árangri til spá fyrir um möguleg efnaskiptaferli í örverum \cite{banga2008optimization,edwards2001silico}.
+Báðar hagnýtingarleiðir verða hér kannaðar með aðstoð línulegra bestunarlíkana, en línuleg bestunarlíkön hafa verið notuð með góðum árangri til spá fyrir um möguleg efnaskiptaferli í örverum \cite{banga2008optimization,edwards2001silico}.
 \section{Aðferð}
-Línulegu bestunarverkefnin voru sett upp í Matlab. Þau voru leyst með aðstoð COBRA Toolbox, CVX og Gurobi.
-
-Áskoranirnar sem felast í því að kanna leiðirnar tvær, humulene-framleiðslu í hefðbundnu bjórgerjunarferli og í ``efnaverksmiðju'' eru nokkuð mismunandi, en báðar leiðir byggjast á greiningu á líkani af gersveppnum.
+% Fyrsti textinn sem er skrifaður
+% Byrja á undirtitlum
+% Mikilvægt að strúktúra málsgreinarnar vel
+% Mikilvægt að tengja 
+Báðar aðferðir byggjast á greiningu á líkani af gersveppnum.
 \subsection{Líkan}
-Notast var við Yeast 7 líkanið\cite{yeastsf} af \emph{Saccharomyces cerevisiae S288c}. Líkanið var valið vegna þess að það er umfangsmikið (m.t.t. fjölda gena og efnahvarfa), með lágt hlutfall blokkaðra efnahvarfa og lágt hlutfall dead-end efna. Önnur líkön gefa betri niðurstöður í sérhæfðum aðstæðum, en þessir eiginleikar Yeast 7 þóttu líklegir til að stuðla að nothæfum niðurstöðum í fyrstu hermunum \cite{heavner2015comparative}. 
+Notast var við Yeast 7 líkanið af gersvepp (\emph{Saccharomyces cerevisiae}), sem sótt var af vefsíðunni \url{http://yeast.sourceforge.net/} og þýtt yfir á Matlab-form sem nýtilegt er með Cobra-pakkanum af Steini Guðmundssyni. Líkanið var valið vegna þess að það er umfangsmikið (m.t.t. fjölda gena og efnahvarfa), með lágt hlutfall blokkaðra efnahvarfa og lágt hlutfall dead-end efna. Önnur líkön gefa betri niðurstöður í sérhæfðum aðstæðum, en þessir eiginleikar Yeast 7 þóttu líklegir til að stuðla að nothæfum niðurstöðum í fyrstu hermunum \cite{heavner2015comparative}.
+
 \subsubsection{Viðbætur á líkani}
 Þekkt ensím, (2E,6E)-farnesyl-diphosphate diphosphate-lyase, myndar humulene út frá farnesyl-diphosphate \cite[KEGG: R08373]{Kanehisa01012000}. Farnesyl-diphosphate finnst í terpenoid lífefnasmíðaferlinu \cite[KEGG: rn00900]{Kanehisa01012000}, en bestun á því efnaferli hefur fengið nokkra athygli \cite{BIT:BIT21216,misawa2011pathway,asadollahi2008production}.
 
 Tveimur grundvallar-efnahvörfum var bætt við líkanið til að framleiða humulene úr farnesyl-diphosphate.
-Um er að ræða efnahvarf sem framleiðir humulene úr farnesyl-diphosphate annars vegar og exchange-hvarf fyrir humulene-ið hins vegar. Þennan viðbætta ``pathway'' má sjá á mynd \ref{fig:pathway}.
+Um er að ræða efnahvarf sem framleiðir humulene úr farnesyl-diphosphate annars vegar og exchange-hvarf fyrir humulene-ið hins vegar. Sjá mynd \ref{fig:pathway}
 
 \begin{figureonecolumn}
 \caption[Viðbætur við Yeast 7]{Efnahvörf sem bætt var við Yeast 7 líkanið.}
@@ -78,13 +81,12 @@ Um er að ræða efnahvarf sem framleiðir humulene úr farnesyl-diphosphate ann
 \end{figureonecolumn}
 \subsection{Framleiðsla í hefðbundnu gerjunarferli}
 \label{sec:hefdbundid}
-Í hefðbundinni bjórgerð er svokallaður virtur fyrst framleiddur úr vatni og korni. Virturinn er sykruríkur vökvi sem síðar er gerjaður. Eiginleikar virtsins og aðstæður gerjunarinnar setja skorður á framleiðslu á humulene með þessari aðferð.
 \subsubsection{Kolefnisgjafar og gefin skilyrði}
 Gerjanlegu sykrurnar í virti eru frúktósi, glúkósi, súkrósi, maltósi og maltótríósi. Þar vega mest hlutverk maltósa, frúktósa og maltótríósa. Maltótríósi er ekki til staðar í Yeast 7 líkaninu og hlutverk annarra kolefnisgjafa er óverulegt, svo til einföldunar voru einungis maltósi og glúkósi tekin til skoðunar. Valin hlutföll eru 1 hlutur glúkósa á móti 2 hlutum maltósa, sem er nálægt meðalhlutföllum þeirra í virti \cite{otter1967determination}. 
 
 Í bjórgerð fer gerjun fram við að mestu leyti loftfirrtar aðstæður. \emph{S. cerevisiae} getur vaxið við slík skilyrði \cite{ishtar2007factors}, en líkanið nær ekki til þeirra.
 \subsubsection{Markfall}
-Þar sem framleiða á heildstæða vöru til neyslu er nauðsynlegt að stýra framleiðslu á fleiri efnum en einungis humulene. Mikilvæg efni í bjór \cite{dequin2001potential} sem tekin voru til athugunar eru:
+Þar sem framleiða á vöru til neyslu er nauðsynlegt að stýra framleiðslu á fleiri efnum en einungis humulene. Mikilvæg efni í bjór \cite{dequin2001potential} sem tekin voru til athugunar eru:
 \begin{itemize}
  \item etanól
  \item ísóamýl acetat, ábyrgt fyrir ``bananalykt'' af ýmsum gerðum bjórs
@@ -95,21 +97,33 @@ Markfall var smíðað sem tekur tillit til þessara efna.
 
 Æskilegu efnunum var úthlutað stuðlum sem jafna forgang þeirra m.t.t. fjölda kolefnisfrumeinda í efnunum, til að koma í veg fyrir að Cobra úthluti efnahvörfum sem seyta efnum með fáum kolefnisfrumeindum óeðlilega miklu flæði. ``Rétt'' gildi á þessum efnum myndi fara eftir gerð bjórsins sem framleiða ætti. Þetta er gert í kóðadæmi \ref{code:addTargetMetabolite}.
 
-\subsubsection{Útreikningar}
-Flæðigreining (e. \emph{flux variability analysis}) og greining á þoli (e. \emph{robustness analysis}) voru framkvæmd á líkaninu. Þetta er gert í kóðadæmi \ref{code:enhancedBrewing}.
-
 \subsection{OptStrain}
-
 \label{sec:optstrain}
 \begin{figure*}
 \caption[OptStrain reikniritið]{Skref OptStrain reikniritsins sem lýst er í \ref{sec:optstrain}. Sjá sérstakar viðbætur á mynd \ref{fig:pathway}}
 \label{fig:flaedirit}
 \includegraphics[width=\linewidth]{Pics/OptStrainOverview}
 \end{figure*}
-\subsubsection{Almenn lýsing}
+Reikniritið notast við útfærslu af OptStrain reikniritinu til þess að finna æskilega lausn sem hámarkar framleiðslu á humulene. OptStrain er framkvæmt í fjórum skrefum. Reikniritið gerir ráð fyrir grunnmódeli af lífveru sem hentar til línulegrar bestunar. Yeast-7 módelið var notað sem grunnmódel.
+
+\paragraph{Skref 1}
+Efnahvörfum úr stórum efnahvarfagagnagrunni er bætt við grunnmódel af gefinni lífveru. Python kóðabútur var notaður til þess að parsa efnahvörf úr kegg-gagnagrunninum yfir á XML-skráarformi og umbreytt yfir á JSON-skáarformat svo hægt væri að bæta þeim við í grunnmódelið til að fjölga mögulegum pathway-um.
+
+\paragraph{Skref 2}
+Seyting æskilegs efnis við gefnar aðstæður er hámörkuð og sett upp sem línulegt besturnarverkefni og leyst. Þetta reyndist mjög einfalt í útfærslu.
+
+\paragraph{Skref 3}
+Lágmörkun á fjölda viðbættra efnahvarfa (úr 1. skrefi) er sett upp sem MILP-verkefni og leyst. Útfærsla á þessu var að stórum hluta byggð á sýnidæmi frá Steini Guðmundssyni.
+
+\paragraph{Skref 4}
+Undir venjulegum kringumstæðum er OptKnock-reiknirit keyrt á breytta módelið til að reyna að finna útslátt sem kúplar seytingu efnisins við vöxt en keyrslutíminn á OptKnock er mjög tímafrekt og til þess að spara tíma þá var notast við GDSL\cite{lun2009large}-reikniritið í staðinn og niðurstöður úr því mæltu með því að slá út eitt efnahvarf; '5-diphosphoinositol-1,2,3,4,6-pentakisphosphate diphosphohydrolase'.
+
 \subsubsection{Útfærsla}
-Breyting frá upphaflegri forskrift: GDLS \cite{lun2009large} í stað OptKnock.
+Skref 1. og 2. var mjög einfalt í útfærslu. Skef 3. reyndist í þyngri kantinum en var viðráðanlegt með aðstoð út sýnidæmi frá Steini Guðmundssyni. Skref 4 reyndist tiltölulega einfalt í útfærslu en í upphafi varð mikill hængur á því notast var við OptKnock reikniritið og það reyndist of hægvirkt til þess að hægt væri að greina niðurstöðurnar á viðráðanlegum tíma, svo breyting var gerð frá upphaflegri forskrift og GDLS \cite{lun2009large} notað í stað OptKnock.
+
 \section{Niðurstöður}
+
+% Undirtitlar hér líka
 
 \begin{figureonecolumn}
 \caption{Hámarksflæði með og án bestunar á humulene-framleiðslu}
@@ -118,10 +132,10 @@ Breyting frá upphaflegri forskrift: GDLS \cite{lun2009large} í stað OptKnock.
 
 \begin{figureonecolumn}
 \caption{Áhrif humulene-framleiðslu á markfallsgildi}
-\includegraphics[width=\linewidth]{Pics/ComparativeProduction}
+\includegraphics[width=\linewidth]{Pics/BrewingRobustnessAnalysis}
 \end{figureonecolumn}
 
-\section{Ályktanir}
+\section{Samantekt}
 % Byrjar oftast eins: Here we set out to...
 
 % \paragraph{Samantekt á niðurstöðum}
@@ -129,7 +143,7 @@ Breyting frá upphaflegri forskrift: GDLS \cite{lun2009large} í stað OptKnock.
 % Ræða hvern undirtitil í niðurstöðu-hlutanum sérstaklega
 % Aftur samantekt á síðustu málsgreinum, summary of impact
 
-Í framhaldinu: Skoða Myrcene \cite[KEGG: C06074]{Kanehisa01012000}, sem er mögulega mikilvægasta sesquiterpene-ið þegar kemur að lykt bjórs \cite{guadagni1966odour}. OptForce\cite{ranganathan2010optforce} hefur gefið góða raun í svipuðum verkefnum og mætti prófa í stað OptStrain.
+Í framhaldinu: Skoða Myrcene \cite[KEGG: C06074]{Kanehisa01012000}, sem er mögulega mikilvægasta sesquiterpene-ið þegar kemur að lykt bjórs \cite{guadagni1966odour}.
 
 %%%%%%%%%%%%%%
 % HEIMILDASKRÁ
@@ -146,18 +160,11 @@ Breyting frá upphaflegri forskrift: GDLS \cite{lun2009large} í stað OptKnock.
 \clearpage
 \appendix
 \section{Kóði}
-Hér má finna valin kóðadæmi. Allan forritskóða og gögn sem unnið er með má finna á \href{https://github.com/Ernir/optstrain}{Github-síðu verkefnisins}.
-
-\subsection{addTargetMetabolite.m}
+\begin{listing}[H]
+\caption[addTargetMetabolite]{Fall sem endurskilgreinir gefið módel, í þessu tilfelli er humulene-framleiðslu bætt við}
 \label{code:addTargetMetabolite}
 \matlab{../addTargetMetabolite.m}
-
-\subsubsection{enhancedBrewing.m}
-\label{code:enhancedBrewing}
-\matlab{../enhancedBrewing.m}
-
-\subsection{OptStrain.m}
-\label{code:OptStrain}
-\matlab{../OptStrain.m}
+%\inputminted[linenos, frame=lines, label=addTargetMetabolite.m, fontsize=\small]{matlab}{../addTargetMetabolite.m}
+\end{listing}
 
 \end{document}
