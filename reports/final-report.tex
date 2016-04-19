@@ -1,5 +1,5 @@
-\documentclass[12pt]{article}
-\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\documentclass[11pt]{article}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2cm, right=2cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[icelandic]{babel}
 \usepackage[T1]{fontenc}
@@ -11,7 +11,23 @@
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{subcaption}
-\usepackage[pdftex,bookmarks=true,colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{lipsum}
+\usepackage[pdftex,bookmarks=true,colorlinks=true,linkcolor=blue,urlcolor=blue, citecolor=blue]{hyperref}
+\usepackage[all]{hypcap}
+
+\hyphenpenalty=9000
+
+\newcommand{\matlab}[1]{\inputminted[linenos, frame=lines, label=#1, fontsize=\small]{matlab}{#1}}
+\renewcommand{\listingscaption}{Kóði}
+
+% One-column environment definitons for multicol - not floating!
+\makeatletter
+\newenvironment{tableonecolumn}{\begin{minipage}{\linewidth}\begin{center}\def\@captype{table}}{\end{center}\end{minipage}}
+
+\newenvironment{figureonecolumn}{\begin{minipage}{\linewidth}\begin{center}\def\@captype{figure}}{\end{center}\end{minipage}}
+\makeatother
 
 \title{Framleiðsla á humulene í Saccharomyces cerevisiae}
 \author{Eiríkur Ernir Þorsteinsson \and Jónas Tryggvi Stefánsson}
@@ -20,14 +36,18 @@
 
 \maketitle
 
+\setlength{\columnsep}{1cm}
+
 \begin{abstract}
-Útdráttur
+\lipsum[150]
 \end{abstract}
+
+\vspace{1cm}
+\begin{multicols}{2}
 
 % Myndir verða mikilvægar, fá 2-4
 % Byrja á myndunum!
 % Hugmynd: Flæðirit yfir virkni reikniritsins
-
 \section{Inngangur}
 
 Þó nokkur fordæmi eru fyrir því að erfðabreyta gersveppum til nota í matvælaiðnaði \cite{dequin2001potential}.
@@ -53,46 +73,52 @@ Notast var við Yeast 7 líkanið af gersvepp (\emph{Saccharomyces cerevisiae}),
 Tveimur grundvallar-efnahvörfum var bætt við líkanið til að framleiða humulene úr farnesyl-diphosphate.
 Um er að ræða efnahvarf sem framleiðir humulene úr farnesyl-diphosphate annars vegar og exchange-hvarf fyrir humulene-ið hins vegar. Sjá mynd \ref{fig:pathway}
 
-\begin{figure}
+\begin{figureonecolumn}
 \caption[Viðbætur við Yeast 7]{Efnahvörf sem bætt var við Yeast 7 líkanið.}
 \label{fig:pathway}
-\includegraphics[width=\textwidth]{Pics/HumuleneAddition}
-\end{figure}
+\includegraphics[width=\linewidth]{Pics/HumuleneAddition}
+\end{figureonecolumn}
 \subsection{Framleiðsla í hefðbundnu gerjunarferli}
 \label{sec:hefdbundid}
 \subsubsection{Kolefnisgjafar og gefin skilyrði}
 Gerjanlegu sykrurnar í virti eru frúktósi, glúkósi, súkrósi, maltósi og maltótríósi. Þar vega mest hlutverk maltósa, frúktósa og maltótríósa. Maltótríósi er ekki til staðar í Yeast 7 líkaninu og hlutverk annarra kolefnisgjafa er óverulegt, svo til einföldunar voru einungis maltósi og glúkósi tekin til skoðunar. Valin hlutföll eru 1 hlutur glúkósa á móti 2 hlutum maltósa, sem er nálægt meðalhlutföllum þeirra í virti \cite{otter1967determination}. 
 
 Í bjórgerð fer gerjun fram við að mestu leyti loftfirrtar aðstæður. \emph{S. cerevisiae} getur vaxið við slík skilyrði \cite{ishtar2007factors}, en líkanið nær ekki til þeirra.
+\subsubsection{Markfall}
+Þar sem framleiða á vöru til neyslu er nauðsynlegt að stýra framleiðslu á fleiri efnum en einungis humulene. Mikilvæg efni í bjór \cite{dequin2001potential} sem tekin voru til athugunar eru:
+\begin{itemize}
+ \item etanól
+ \item ísóamýl acetat, ábyrgt fyrir ``bananalykt'' af ýmsum gerðum bjórs
+ \item glýseról, veitir sætutilfinningu
+ \item þvagefni, sem ólykt er af og þarf að lágmarka
+\end{itemize}
+Markfall var smíðað sem tekur tillit til þessara efna. 
+
+Æskilegu efnunum var úthlutað stuðlum sem jafna forgang þeirra m.t.t. fjölda kolefnisfrumeinda í efnunum, til að koma í veg fyrir að Cobra úthluti efnahvörfum sem seyta efnum með fáum kolefnisfrumeindum óeðlilega miklu flæði. ``Rétt'' gildi á þessum efnum myndi fara eftir gerð bjórsins sem framleiða ætti. Þetta er gert í kóðadæmi \ref{code:addTargetMetabolite}.
+
 \subsection{OptStrain}
 \label{sec:optstrain}
-\begin{figure}
+\begin{figure*}
 \caption[OptStrain reikniritið]{Skref OptStrain reikniritsins sem lýst er í \ref{sec:optstrain}. Sjá sérstakar viðbætur á mynd \ref{fig:pathway}}
 \label{fig:flaedirit}
-\includegraphics[width=\textwidth]{Pics/OptStrainOverview}
-\end{figure}
+\includegraphics[width=\linewidth]{Pics/OptStrainOverview}
+\end{figure*}
 \subsubsection{Almenn lýsing}
 \subsubsection{Útfærsla}
 
 \section{Niðurstöður}
 
-Mikilvæg efni eru: ethanol, isoamyl acetate (bananabragð), glycerol (sæta), urea (óbragð) \cite{dequin2001potential}.
-
 % Undirtitlar hér líka
 
-\begin{figure}
-\caption[Áhrif humulene á hefðbundna gerjun]{Yfirlit yfir áhrif humulene-framleiðslu á hefðbundna gerjun}
-\centering
-\begin{subfigure}[b]{0.45\textwidth}
+\begin{figureonecolumn}
 \caption{Hámarksflæði með og án bestunar á humulene-framleiðslu}
-\includegraphics[width=\textwidth]{Pics/BrewingMetMaxFlow}
-\end{subfigure}
-\hspace{0.5cm}
-\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\linewidth]{Pics/BrewingMetMaxFlow}
+\end{figureonecolumn}
+
+\begin{figureonecolumn}
 \caption{Áhrif humulene-framleiðslu á markfallsgildi}
-\includegraphics[width=\textwidth]{Pics/BrewingRobustnessAnalysis}
-\end{subfigure}
-\end{figure}
+\includegraphics[width=\linewidth]{Pics/BrewingRobustnessAnalysis}
+\end{figureonecolumn}
 
 \section{Samantekt}
 % Byrjar oftast eins: Here we set out to...
@@ -102,11 +128,28 @@ Mikilvæg efni eru: ethanol, isoamyl acetate (bananabragð), glycerol (sæta), u
 % Ræða hvern undirtitil í niðurstöðu-hlutanum sérstaklega
 % Aftur samantekt á síðustu málsgreinum, summary of impact
 
-\appendix
+Í framhaldinu: Skoða Myrcene \cite[KEGG: C06074]{Kanehisa01012000}?
+
 %%%%%%%%%%%%%%
 % HEIMILDASKRÁ
 %%%%%%%%%%%%%%
 \bibliographystyle{plain}
 \bibliography{bioinfo.bib}
+
+\end{multicols}
+
+%%%%%%%%%%%%%%
+% VIÐAUKI
+%%%%%%%%%%%%%%
+
+\clearpage
+\appendix
+\section{Kóði}
+\begin{listing}[H]
+\caption[addTargetMetabolite]{Fall sem endurskilgreinir gefið módel, í þessu tilfelli er humulene-framleiðslu bætt við}
+\label{code:addTargetMetabolite}
+\matlab{../addTargetMetabolite.m}
+%\inputminted[linenos, frame=lines, label=addTargetMetabolite.m, fontsize=\small]{matlab}{../addTargetMetabolite.m}
+\end{listing}
 
 \end{document}

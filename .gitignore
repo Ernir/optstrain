@@ -7,6 +7,7 @@ reports/*.pdf
 *.log
 *.out
 *_minted*
+*.pyg
 
 gurobi
 
