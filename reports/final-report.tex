@@ -54,19 +54,20 @@
 
 Humlar eru dýrt hráefni sem erfitt er að rækta á mörgum svæðum heimsins og hrörna hratt við geymslu. Þetta gefur ástæðu til að athuga hvort að hægt sé að minnka það magn humla sem bjórgerðin þarf með efnaviðbótum.
 
-Humulene er eitt mikilvægra efnasambanda í lykt og bragði bjórs \cite{howard1957evaluation}. Lagt er upp með athuga reikningslegar forsendur fyrir því að nota erfðabreyttan gersvepp til að framleiða humulene, en þó nokkur fordæmi eru fyrir því að erfðabreyta gersveppum til nota í matvælaiðnaði \cite{dequin2001potential}.
+Humulene\cite[KEGG: C09684]{Kanehisa01012000} er eitt mikilvægra efnasambanda í lykt og bragði bjórs \cite{howard1957evaluation}. Lagt er upp með athuga reikningslegar forsendur fyrir því að nota erfðabreyttan gersvepp til að framleiða humulene, en þó nokkur fordæmi eru fyrir því að erfðabreyta gersveppum til nota í matvælaiðnaði \cite{dequin2001potential}.
 
-Fyrirsjáanlegar eru tvær aðalleiðir til að hagnýta framleiðslu á humulene í gersvepp. Fyrri leiðin er að nota erfðabreyttan gersvepp til að gerja bjór í annars hefðbundnu bjórgerðarferli. Seinni leiðin er að besta framleiðslu á hreinu humulene, sem síðan væri einangrað. 
+Fyrirsjáanlegar eru tvær aðalleiðir til að hagnýta framleiðslu á humulene í gersvepp. Fyrri leiðin er að nota erfðabreyttan gersvepp til að gerja bjór í annars hefðbundnu bjórgerðarferli. Seinni leiðin er að besta framleiðslu á hreinu humulene, sem síðan væri einangrað.
 
-Báðar hagnýtingarleiðir verða hér kannaðar með aðstoð línulegra bestunarlíkana, en línuleg bestunarlíkön hafa verið notuð með góðum árangri til spá fyrir um möguleg efnaskiptaferli í örverum \cite{banga2008optimization,edwards2001silico}.
+Báðar hagnýtingarleiðir verða hér kannaðar með því að setja þær upp sem línuleg bestunarverkefni, en línuleg bestunarlíkön hafa verið notuð með góðum árangri til spá fyrir um möguleg efnaskiptaferli í örverum \cite{banga2008optimization,edwards2001silico}.
 \section{Aðferð}
+Línulegu bestunarverkefnin voru sett upp í Matlab. Þau voru leyst með aðstoð COBRA Toolbox, CVX og Gurobi.
 % Fyrsti textinn sem er skrifaður
 % Byrja á undirtitlum
 % Mikilvægt að strúktúra málsgreinarnar vel
 % Mikilvægt að tengja 
 Báðar aðferðir byggjast á greiningu á líkani af gersveppnum.
 \subsection{Líkan}
-Notast var við Yeast 7 líkanið af gersvepp (\emph{Saccharomyces cerevisiae}), sem sótt var af vefsíðunni \url{http://yeast.sourceforge.net/} og þýtt yfir á Matlab-form sem nýtilegt er með Cobra-pakkanum af Steini Guðmundssyni. Líkanið var valið vegna þess að það er umfangsmikið (m.t.t. fjölda gena og efnahvarfa), með lágt hlutfall blokkaðra efnahvarfa og lágt hlutfall dead-end efna. Önnur líkön gefa betri niðurstöður í sérhæfðum aðstæðum, en þessir eiginleikar Yeast 7 þóttu líklegir til að stuðla að nothæfum niðurstöðum í fyrstu hermunum \cite{heavner2015comparative}.
+Notast var við Yeast 7 líkanið\cite{yeastsf} af \emph{Saccharomyces cerevisiae S288c}. Líkanið var valið vegna þess að það er umfangsmikið (m.t.t. fjölda gena og efnahvarfa), með lágt hlutfall blokkaðra efnahvarfa og lágt hlutfall dead-end efna. Önnur líkön gefa betri niðurstöður í sérhæfðum aðstæðum, en þessir eiginleikar Yeast 7 þóttu líklegir til að stuðla að nothæfum niðurstöðum í fyrstu hermunum \cite{heavner2015comparative}.
 
 \subsubsection{Viðbætur á líkani}
 Þekkt ensím, (2E,6E)-farnesyl-diphosphate diphosphate-lyase, myndar humulene út frá farnesyl-diphosphate \cite[KEGG: R08373]{Kanehisa01012000}. Farnesyl-diphosphate finnst í terpenoid lífefnasmíðaferlinu \cite[KEGG: rn00900]{Kanehisa01012000}, en bestun á því efnaferli hefur fengið nokkra athygli \cite{BIT:BIT21216,misawa2011pathway,asadollahi2008production}.
@@ -98,6 +99,7 @@ Markfall var smíðað sem tekur tillit til þessara efna.
 Æskilegu efnunum var úthlutað stuðlum sem jafna forgang þeirra m.t.t. fjölda kolefnisfrumeinda í efnunum, til að koma í veg fyrir að Cobra úthluti efnahvörfum sem seyta efnum með fáum kolefnisfrumeindum óeðlilega miklu flæði. ``Rétt'' gildi á þessum efnum myndi fara eftir gerð bjórsins sem framleiða ætti. Þetta er gert í kóðadæmi \ref{code:addTargetMetabolite}.
 
 \subsection{OptStrain}
+
 \label{sec:optstrain}
 \begin{figure*}
 \caption[OptStrain reikniritið]{Skref OptStrain reikniritsins sem lýst er í \ref{sec:optstrain}. Sjá sérstakar viðbætur á mynd \ref{fig:pathway}}
@@ -106,10 +108,8 @@ Markfall var smíðað sem tekur tillit til þessara efna.
 \end{figure*}
 \subsubsection{Almenn lýsing}
 \subsubsection{Útfærsla}
-
+Breyting frá upphaflegri forskrift: GDLS \cite{lun2009large} í stað OptKnock.
 \section{Niðurstöður}
-
-% Undirtitlar hér líka
 
 \begin{figureonecolumn}
 \caption{Hámarksflæði með og án bestunar á humulene-framleiðslu}
@@ -118,10 +118,10 @@ Markfall var smíðað sem tekur tillit til þessara efna.
 
 \begin{figureonecolumn}
 \caption{Áhrif humulene-framleiðslu á markfallsgildi}
-\includegraphics[width=\linewidth]{Pics/BrewingRobustnessAnalysis}
+\includegraphics[width=\linewidth]{Pics/ComparativeProduction}
 \end{figureonecolumn}
 
-\section{Samantekt}
+\section{Ályktanir}
 % Byrjar oftast eins: Here we set out to...
 
 % \paragraph{Samantekt á niðurstöðum}
@@ -129,7 +129,7 @@ Markfall var smíðað sem tekur tillit til þessara efna.
 % Ræða hvern undirtitil í niðurstöðu-hlutanum sérstaklega
 % Aftur samantekt á síðustu málsgreinum, summary of impact
 
-Í framhaldinu: Skoða Myrcene \cite[KEGG: C06074]{Kanehisa01012000}, sem er mögulega mikilvægasta sesquiterpene-ið þegar kemur að lykt bjórs \cite{guadagni1966odour}.
+Í framhaldinu: Skoða Myrcene \cite[KEGG: C06074]{Kanehisa01012000}, sem er mögulega mikilvægasta sesquiterpene-ið þegar kemur að lykt bjórs \cite{guadagni1966odour}. OptForce\cite{ranganathan2010optforce} hefur gefið góða raun í svipuðum verkefnum og mætti prófa í stað OptStrain.
 
 %%%%%%%%%%%%%%
 % HEIMILDASKRÁ
@@ -147,10 +147,15 @@ Markfall var smíðað sem tekur tillit til þessara efna.
 \appendix
 \section{Kóði}
 \begin{listing}[H]
-\caption[addTargetMetabolite]{Fall sem endurskilgreinir gefið módel, í þessu tilfelli er humulene-framleiðslu bætt við}
+\caption{Keyrsluskrá OptStrain-reikniritsins}
+\label{code:OptStrain}
+\matlab{../OptStrain.m}
+\end{listing}
+
+\begin{listing}[H]
+\caption{Fall sem endurskilgreinir gefið módel, í þessu tilfelli er humulene-framleiðslu bætt við}
 \label{code:addTargetMetabolite}
 \matlab{../addTargetMetabolite.m}
-%\inputminted[linenos, frame=lines, label=addTargetMetabolite.m, fontsize=\small]{matlab}{../addTargetMetabolite.m}
 \end{listing}
 
 \end{document}
