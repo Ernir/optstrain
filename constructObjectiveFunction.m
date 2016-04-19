@@ -1,4 +1,4 @@
-function model = addTargetMetabolite(model)
+function model = constructObjectiveFunction(model)
 % Before OptStrain is considered, make customized additions to the model.
 % In this case, it means enabling humulene production
 
