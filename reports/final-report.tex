@@ -76,6 +76,11 @@ Um er að ræða efnahvarf sem framleiðir humulene úr farnesyl-diphosphate ann
 \label{fig:pathway}
 \includegraphics[width=\linewidth]{Pics/HumuleneAddition}
 \end{figureonecolumn}
+\begin{figure*}[b]
+\caption[OptStrain reikniritið]{Skref OptStrain reikniritsins sem lýst er í \ref{sec:optstrain}. Sjá sérstakar viðbætur á mynd \ref{fig:pathway}}
+\label{fig:flaedirit}
+\includegraphics[width=\linewidth]{Pics/OptStrainOverview}
+\end{figure*}
 \subsection{Framleiðsla í hefðbundnu gerjunarferli}
 \label{sec:hefdbundid}
 Í hefðbundinni bjórgerð er svokallaður virtur fyrst framleiddur úr vatni og korni. Virturinn er sykruríkur vökvi sem síðar er gerjaður. Eiginleikar virtsins og aðstæður gerjunarinnar setja skorður á framleiðslu á humulene með þessari aðferð.
@@ -104,11 +109,6 @@ Sé ætlunin eingöngu að framleiða humulene óháð öðrum skilyrðum sem ti
 Einungis þarf að taka tillit til humulene-framleiðslu við þessar aðstæður, svo markfallið er einfaldara. Blanda maltósa og glúkósa var áfram notuð sem kolefnisgjafi til að auðvelda samanburð við framleiðslu í virti. Slaki var gefinn á súrefnisupptöku. Þetta er gert í kóðadæmi \ref{code:simpleObjectiveFunction}.
 \subsubsection{OptStrain}
 \label{sec:optstrain}
-\begin{figure*}
-\caption[OptStrain reikniritið]{Skref OptStrain reikniritsins sem lýst er í \ref{sec:optstrain}. Sjá sérstakar viðbætur á mynd \ref{fig:pathway}}
-\label{fig:flaedirit}
-\includegraphics[width=\linewidth]{Pics/OptStrainOverview}
-\end{figure*}
 %Reikniritið notast við útfærslu af OptStrain reikniritinu til þess að finna æskilega lausn sem hámarkar framleiðslu á humulene. 
 OptStrain er framkvæmt í fjórum skrefum. Reikniritið gerir ráð fyrir grunnmódeli af lífveru sem hentar til línulegrar bestunar. Yeast-7 módelið var notað sem grunnmódel.
 
@@ -128,14 +128,28 @@ Undir venjulegum kringumstæðum er OptKnock-reiknirit keyrt á breytta módeli�
 Skref 1. og 2. var mjög einfalt í útfærslu. Skef 3. reyndist í þyngri kantinum en var viðráðanlegt með aðstoð út sýnidæmi frá Steini Guðmundssyni. Skref 4 reyndist tiltölulega einfalt í útfærslu en í upphafi varð mikill hængur á því notast var við OptKnock reikniritið og það reyndist of hægvirkt til þess að hægt væri að greina niðurstöðurnar á viðráðanlegum tíma, svo breyting var gerð frá upphaflegri forskrift og GDLS \cite{lun2009large} notað í stað OptKnock.
 
 \section{Niðurstöður}
+\subsection{Humulene-framleiðsla samhliða bjórgerjun}
+Hermun á humulene-framleiðslu við hefðbundnar bjórgerjunaraðstæður hafði engin áhrif á möguleg flæðisgildi annarra efna sem tekin voru til athugunar þegar flæðigreining var framkvæmd með þeirri skorðu að gildi markfalls mætti ekki fara undir 80\% af hámarksgildi. Sjá mynd \ref{fig:maxflow}. Þetta bendir til þess að hægt sé að láta gersveppinn seyta humulene án þess að það komi niður á öðrum mikilvægum þáttum - eða að minnsta kosti ekki öllum samtímis.
 
 \begin{figureonecolumn}
 \caption{Hámarksflæði með og án bestunar á humulene-framleiðslu}
+\label{fig:maxflow}
 \includegraphics[width=\linewidth]{Pics/BrewingMetMaxFlow}
 \end{figureonecolumn}
 
+Þetta er staðfest af þolgreiningu, framleiðsla á humulene reyndist hafa lítil áhrif á hámarksgildi markfalls. Áhrifin á gæðin eru óveruleg sé framleiðsla á humulene ekki þeim mun meiri, eins og sjá má á mynd \ref{fig:robust}. Gæðin liggja vissulega niður á við, en fyrst í stað er hallinn lítill.
+
 \begin{figureonecolumn}
-\caption{Áhrif humulene-framleiðslu á markfallsgildi}
+\caption{Áhrif humulene-framleiðslu á markfallsgildi, sem táknar heildargæði bjórsins}
+\label{fig:robust}
+\includegraphics[width=\linewidth]{Pics/BrewingRobustnessAnalysis}
+\end{figureonecolumn}
+\subsection{Humulene-framleiðsla við sérhæfðar aðstæður}
+
+\subsection{Samantekt}
+
+\begin{figureonecolumn}
+\caption{Samanburður á hámarksframleiðslu humulene á óbestuðum gersveppi við bjórgerðaraðstæður og á bestuðum gersveppi við sérhæfðar aðstæður}
 \includegraphics[width=\linewidth]{Pics/ComparativeProduction}
 \end{figureonecolumn}
 
@@ -146,6 +160,8 @@ Skref 1. og 2. var mjög einfalt í útfærslu. Skef 3. reyndist í þyngri kant
 % \paragraph{Hvernig falla niðurstöðurnar að öðrum þekktum niðurstöðum}
 % Ræða hvern undirtitil í niðurstöðu-hlutanum sérstaklega
 % Aftur samantekt á síðustu málsgreinum, summary of impact
+
+Það magn humulene sem æskilegt væri að láta gersveppinn framleiða er mismunandi eftir bjórtegundum sem brugga skal. Sé framleiðslan á humulene meiri í því afbrigði gersveppsins sem tekst að rækta á rannsóknarstofu heldur en bjór er talinn þurfa mætti nota erfðabreytta gersveppinn í bland við hinn óerfðabreytta.
 
 Í framhaldinu: Skoða Myrcene \cite[KEGG: C06074]{Kanehisa01012000}, sem er mögulega mikilvægasta sesquiterpene-ið þegar kemur að lykt bjórs \cite{guadagni1966odour}. OptForce\cite{ranganathan2010optforce} hefur gefið góða raun í svipuðum verkefnum og mætti prófa í stað OptStrain.
 

@@ -5,7 +5,7 @@ keggToYeastPath = 'data/keggToYeast.json';
 unidbPath = 'data/unidb.xlsx';
 
 % Make our custom (problem-specfic) additions to the model
-model = constructObjectiveFunction(model);
+model = simpleObjectiveFunction(model);
 
 % Optstrain step 1 - add a universal database of new reactions
 verbosePrint('Starting OptStrain step 1', verbose);
