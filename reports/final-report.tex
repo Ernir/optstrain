@@ -122,7 +122,7 @@ Seyting æskilegs efnis við gefnar aðstæður er hámörkuð og sett upp sem l
 Lágmörkun á fjölda viðbættra efnahvarfa (úr 1. skrefi) er sett upp sem MILP-verkefni og leyst. Útfærsla á þessu var að stórum hluta byggð á sýnidæmi frá Steini Guðmundssyni.
 
 \paragraph{Skref 4}
-Undir venjulegum kringumstæðum er OptKnock-reiknirit keyrt á breytta módelið til að reyna að finna útslátt sem kúplar seytingu efnisins við vöxt en keyrslutíminn á OptKnock er mjög tímafrekt og til þess að spara tíma þá var notast við GDSL\cite{lun2009large}-reikniritið í staðinn og niðurstöður úr því mæltu með því að slá út eitt efnahvarf; '5-diphosphoinositol-1,2,3,4,6-pentakisphosphate diphosphohydrolase'.
+Undir venjulegum kringumstæðum er OptKnock-reiknirit keyrt á breytta módelið til að reyna að finna útslátt sem kúplar seytingu efnisins við vöxt en keyrslutíminn á OptKnock er mjög tímafrekt og til þess að spara tíma þá var notast við GDSL\cite{lun2009large}-reikniritið í staðinn.
 
 \subsubsection{Útfærsla}
 Skref 1. og 2. var mjög einfalt í útfærslu. Skef 3. reyndist í þyngri kantinum en var viðráðanlegt með aðstoð út sýnidæmi frá Steini Guðmundssyni. Skref 4 reyndist tiltölulega einfalt í útfærslu en í upphafi varð mikill hængur á því notast var við OptKnock reikniritið og það reyndist of hægvirkt til þess að hægt væri að greina niðurstöðurnar á viðráðanlegum tíma, svo breyting var gerð frá upphaflegri forskrift og GDLS \cite{lun2009large} notað í stað OptKnock.
@@ -144,14 +144,20 @@ Hermun á humulene-framleiðslu við hefðbundnar bjórgerjunaraðstæður hafð
 \label{fig:robust}
 \includegraphics[width=\linewidth]{Pics/BrewingRobustnessAnalysis}
 \end{figureonecolumn}
-\subsection{Humulene-framleiðsla við sérhæfðar aðstæður}
+\subsection{Humulene-framleiðsla við sérframleiðsluaðstæður}
+Keyrsla OptStrain breytti litlu um heildarafköst gersveppsins við humulene-framleiðslu. Afköstin jukust miðað við óbreytta útgáfu gersveppsins, en þar munaði mest um einfaldara markfall.
 
-\subsection{Samantekt}
+GDLS-skrefið ráðlagði útslátt á einu efnahvarfi, \emph{``5-diphosphoinositol-1,2,3,4,6-pentakisphosphate diphosphohydrolase''}, en það dugði ekki til vaxtarkúplunar.
+\subsection{Samanburður}
+Samanburð á hámarksframleiðslu humulene í óbestuðum gersveppi við bjórgerðaraðstæður og á bestuðum gersveppi við sérhæfðar aðstæður má sjá á mynd \ref{fig:comparative}. Í fyrra tilvikinu er um að ræða hámarksframleiðslu á humulene þegar gildi markfallsins þarf að vera innan 80\% af hámarksgildi sínu, hins vegar einfaldlega hámarksflæði á humulene við bestu fáanlegu aðstæður. Kolefnismagn sem sveppurinn hefur til umráða er í báðum tilvikum það sama.
 
 \begin{figureonecolumn}
-\caption{Samanburður á hámarksframleiðslu humulene á óbestuðum gersveppi við bjórgerðaraðstæður og á bestuðum gersveppi við sérhæfðar aðstæður}
+\caption{Samanburður á humuleneframleiðslu við bjórgerðaraðstæður og við hámörkunaraðstæður}
+\label{fig:comparative}
 \includegraphics[width=\linewidth]{Pics/ComparativeProduction}
 \end{figureonecolumn}
+
+Kolefnisnýtingin til humulene-framleiðslu verður að hámarki $\approx32\%$ í bjórnum, en $\approx44\%$ við sérhæfðu aðstæðurnar.
 
 \section{Ályktanir}
 % Byrjar oftast eins: Here we set out to...
